@@ -1,22 +1,53 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-
 <!-- *********************************************************************-->
 <!-- Copyright 2016-2018                                                  -->
 <!-- Portland Community College                                           -->
 <!--                                                                      -->
 <!-- This file is part of Open Resources for Community College Algebra    -->
 <!-- (ORCCA).                                                             -->
+<!--                                                                      -->
+<!-- Open Resources for Community College Algebra is licensed under a     -->
+<!-- Creative Commons Attribution 4.0 International License.              -->
+<!--                                                                      -->
+<!-- Under this license, any user of this textbook or the textbook        -->
+<!-- contents must provide proper attribution as follows.                 -->
+<!--                                                                      -->
+<!-- If you redistribute all or part of this textbook, then you must      -->
+<!-- include in every digital format page view (including but not         -->
+<!-- limited to EPUB, PDF, and HTML) and on every physical printed page   -->
+<!-- the following attribution:                                           -->
+<!--                                                                      -->
+<!-- Original source material, products with readable and accessible      -->
+<!-- math content, and other information freely available at              -->
+<!-- pcc.edu/orcca.                                                       -->
+<!--                                                                      -->
+<!-- If you redistribute all or part of this textbook, then you must      -->
+<!-- reproduce any math content (such as math expressions and equations)  -->
+<!-- in a readable manner, and offer math content in at least one web     -->
+<!-- accessible manner.                                                   -->
+<!--                                                                      -->
+<!-- The Portland Community College name, Portland Community College      -->
+<!-- logo, ORCCA name, Open Resources for Community College Algebra name, -->
+<!-- ORCCA logo, and front and back cover designs are not subject to the  -->
+<!-- Creative Commons license and may not be reproduced without the       -->
+<!-- prior and express written consent of Portland Community College.     -->
+<!--                                                                      -->
+<!-- For questions regarding this license, please contact                 -->
+<!-- orcca-group@pcc.edu.                                                 -->
 <!-- *********************************************************************-->
-
 <docinfo>
-
     <!-- Thumbnail for HTML -->
-    <brandlogo url="http://www.pcc.edu/ORCCA" source="images/orca3.png" />
-
+  <brandlogo url="http://www.pcc.edu/ORCCA" source="images/orca3.png" />
     <!-- For title into HTML head, then tabs, bookmarks, etc -->
-    <initialism>ORCCA</initialism>
+  <initialism>ORCCA</initialism>
+  <cross-references text="global" />
 
-    <cross-references text="global" />
+  <rename element="solution" lang="en-US">Explanation</rename>
+  <rename element="algorithm" lang="en-US">Process</rename>
+
+  <images>
+    <archive>eps pdf png svg tex</archive>
+  </images>
 
     <latex-preamble>
       <package>cancel</package>
@@ -62,10 +93,20 @@
 \newcommand{\attention}[1]{\mathord{\overset{\downarrow}{#1}}}
 %
 %
+%  nextoperation (draw attention to the next order)
+%  Usage: 2+\nextoperation{3\cdot4}
+\newcommand{\nextoperation}[1]{\mathord{\boxed{#1}}}
+%
+%
 %  substitute (substitute a value for a variable)
 %  Usage: x+1\amp=2
 %         \substitute{1}+1\amp=2
 \newcommand{\substitute}[1]{{\color{blue}{{#1}}}}
+%
+%
+%  pinover (put a pin over something with text labeling)
+%  Usage: \pinover{x}{what}
+\newcommand{\pinover}[2]{\overset{\overset{\mathrm{\ #2\ }}{|}}{\strut #1 \strut}}
 %
 %
 %  addright (add to the right)
@@ -108,7 +149,7 @@
 \newcommand{\divideright}[1]{{\color{blue}{{{}\div#1}}}}
 %
 %
-%  cancelhighlight (draw attention to when a factor is cancels)
+%  cancelhighlight (draw attention to when a factor is canceled)
 %  Usage: \frac{(x+1)\cancelhighlight{(x+2)}{\cancelhighlight{(x+2)}}}
 \newcommand{\cancelhighlight}[1]{{\color{blue}{{\cancel{#1}}}}}
 %
@@ -120,13 +161,9 @@
 \newcommand{\cat}{\text{&#128049;}}
 \newcommand{\dog}{\text{&#128054;}}
 
-
     </macros>
-
-
     <!-- For LaTeX-based images; inserted both into tex preamble, -->
     <!-- and into standalone preambles for svg production         -->
-
     <latex-image-preamble>
     <![CDATA[
     \usepackage{pgfplots}
@@ -160,10 +197,14 @@
     \pgfplotsset{symmetryaxis/.style   = {color=gray, mark=none, line width=1pt, <->, dashed}}
     \pgfplotsset{guideline/.style      = {color=gray, mark=none, line width=1pt, -}}
     \tikzset{guideline/.style          = {color=gray, mark=none, line width=1pt, -}}
+    \pgfplotsset{altitude/.style       = {dashed, color=gray, thick, mark=none, -}}
+    \tikzset{altitude/.style           = {dashed, color=gray, thick, mark=none, -}}
+    \pgfplotsset{rightangle/.style     = {color=gray, mark=none, -}}
+    \tikzset{rightangle/.style         = {color=gray, mark=none, -}}
     \pgfplotsset{closedboundary/.style = {color=black, mark=none, line width=1pt, {Kite}-{Kite},solid}}
     \tikzset{closedboundary/.style     = {color=black, mark=none, line width=1pt, {Kite}-{Kite},solid}}
-    \pgfplotsset{openboundary/.style = {color=black, mark=none, line width=1pt, {Kite}-{Kite},dashed}}
-    \tikzset{openboundary/.style     = {color=black, mark=none, line width=1pt, {Kite}-{Kite},dashed}}
+    \pgfplotsset{openboundary/.style   = {color=black, mark=none, line width=1pt, {Kite}-{Kite},dashed}}
+    \tikzset{openboundary/.style       = {color=black, mark=none, line width=1pt, {Kite}-{Kite},dashed}}
     \tikzset{verticallinetest/.style   = {color=gray, mark=none, line width=1pt, <->,dashed}}
     \pgfplotsset{soliddot/.style       = {color=firstcolor,  mark=*, only marks}}
     \pgfplotsset{hollowdot/.style      = {color=firstcolor,  mark=*, only marks, fill=yellow!30}} %this color is set to match axis background/.style
@@ -185,6 +226,7 @@
     \pgfplotsset{numberline/.style     = {xmin=-10,xmax=10,
                                           minor xtick={-11,-10,...,11},
                                           xtick={-10,-5,...,10},
+                                          every tick/.append style={thick},
                                           axis y line=none,
                                           y=15pt,
                                           axis lines=middle,
@@ -242,7 +284,7 @@
         %label style={font=\scriptsize},
         legend cell align=left,
         %legend style={font=\scriptsize},
-        width = {ifthenelse(.9\linewidth>.45\textwidth,0.45\textwidth,.9\linewidth)},
+        %width = {ifthenelse(.9\linewidth>.45\textwidth,0.45\textwidth,.9\linewidth)},
         grid = both,
         grid style = {solid,gray!40},
         axis background/.style={fill=yellow!30},
@@ -299,10 +341,10 @@
     ]]>
     </latex-image-preamble>
 
-    <search>
-      <google>
-        <cx>010270249047521811026:idd6gzxiadw</cx>
-      </google>
-    </search>
-
+  <search>
+    <google>
+      <cx>010270249047521811026:idd6gzxiadw</cx>
+    </google>
+  </search>
 </docinfo>
+
